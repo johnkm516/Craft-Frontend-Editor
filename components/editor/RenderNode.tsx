@@ -45,7 +45,7 @@ export const RenderNode = ({ render }: any) => {
     name,
     moveable,
     deletable,
-    connectors: { connect, drag },
+    connectors: { drag },
     parent,
   } = useNode((node) => ({
     isHover: node.events.hovered,
@@ -62,7 +62,7 @@ export const RenderNode = ({ render }: any) => {
 
   useEffect(() => {
     if (dom) {
-      if (isActive || isHover) dom.classList.add('component-selected');
+      if (isActive) dom.classList.add('component-selected');
       else dom.classList.remove('component-selected');
     }
   }, [dom, isActive, isHover]);
@@ -113,7 +113,7 @@ export const RenderNode = ({ render }: any) => {
             >
               <h2 className="flex-1 mr-4">{name}</h2>
               {moveable ? (
-                <Btn className="mr-2 cursor-move" ref={dom => connect(drag(dom!))}>
+                <Btn className="mr-2 cursor-move" ref={dom => drag(dom!)}>
                   <Move />
                 </Btn>
               ) : null}
@@ -139,7 +139,7 @@ export const RenderNode = ({ render }: any) => {
                 </Btn>
               ) : null}
             </IndicatorDiv>,
-            document?.querySelector('.page-container')!
+            document.querySelector('.page-container')!
           )
         : null}
       {render}
