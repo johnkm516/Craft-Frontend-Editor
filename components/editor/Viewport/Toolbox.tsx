@@ -1,4 +1,4 @@
-import { Element, useEditor } from '@craftjs/core';
+import { EditorState, Element, useEditor } from '@craftjs/core';
 import { Tooltip } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
@@ -35,7 +35,7 @@ export const Toolbox = () => {
   const {
     enabled,
     connectors: { create },
-  } = useEditor((state) => ({
+  } = useEditor((state: EditorState) => ({
     enabled: state.options.enabled,
   }));
 
