@@ -1,9 +1,22 @@
+import { ApolloProvider } from '@apollo/client';
+import apolloClient from 'graphql/apollo-client';
+import App from 'next/app';
 import React from 'react';
+//import { Provider } from 'react-redux';
 
 import '../styles/app.css';
 
-function MyApp({ Component, pageProps }: any) {
-  return <Component {...pageProps} />;
+class MyApp extends App {
+  render() {
+    const { Component, pageProps, store } = this.props;
+    return (
+      //<Provider store={store}>
+        <ApolloProvider client= {apolloClient}>
+        <Component {...pageProps} />
+        </ApolloProvider>
+      //</Provider>
+    );
+  }
 }
 
 // Only uncomment this method if you have blocking data requirements for

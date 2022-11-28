@@ -6,7 +6,7 @@ import { ToolbarDropdown } from './ToolbarDropdown';
 import { ToolbarTextInput } from './ToolbarTextInput';
 
 
-const SLIDER_PREFIX = 'StyledSlider';
+const SLIDER_PREFIX = 'MuiSlider';
 const sliderClasses = {
   root: `${SLIDER_PREFIX}-root`,
   thumb: `${SLIDER_PREFIX}-thumb`,
@@ -18,21 +18,21 @@ const sliderClasses = {
   markActive: `${SLIDER_PREFIX}-markActive`
 }
 
-
 const SliderStyle = styled(Slider)(({}) => ({
     [`&.${sliderClasses.root}`]: {
       color: '#3880ff',
-      height: 2,
+      height: 3,
       padding: '5px 0',
       width: '100%',
+
     },
     [`& .${sliderClasses.thumb}`]: {
       height: 14,
       width: 14,
       backgroundColor: '#fff',
       boxShadow: iOSBoxShadow,
-      marginTop: -7,
-      marginLeft: -7,
+      marginTop: 0,
+      marginLeft: 0,
       '&:focus,&:hover,&$active': {
         boxShadow:
           '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
@@ -102,7 +102,7 @@ export const ToolbarItem = ({
   const value = Array.isArray(propValue) ? propValue[index!] : propValue;
 
   return (
-    <Grid item xs={full ? 12 : 6}>
+    <Grid item xs={full ? 12 : 6} sx={{ fontWeight: "light" }}> 
       <div className="mb-2">
         {['text', 'color', 'bg', 'number'].includes(type) ? (
           <ToolbarTextInput
@@ -122,7 +122,7 @@ export const ToolbarItem = ({
         ) : type === 'slider' ? (
           <>
             {props.label ? (
-              <h4 className="text-sm text-light-gray-2">{props.label}</h4>
+              <h4 style={{ marginTop: 10 }} className="text-sm text-light-gray-2">{props.label}</h4>
             ) : null}
             <SliderStyle
               value={parseInt(value) || 0}
@@ -144,7 +144,7 @@ export const ToolbarItem = ({
         ) : type === 'radio' ? (
           <>
             {props.label ? (
-              <h4 className="text-sm text-light-gray-2">{props.label}</h4>
+              <h4 style={{ marginTop: 10, fontWeight: 'light' }} className="text-sm text-light-gray-2">{props.label}</h4>
             ) : null}
             <RadioGroup
               value={value || 0}

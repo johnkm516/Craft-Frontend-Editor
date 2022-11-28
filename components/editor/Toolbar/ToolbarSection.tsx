@@ -3,8 +3,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Divider, Grid, styled } 
 
 import React from 'react';
 
-const PANEL_PREFIX = 'StyledPanel';
-const SUMMARY_PREFIX = 'StyledSummary';
+const PANEL_PREFIX = 'MuiAccordion';
+const SUMMARY_PREFIX = 'MuiAccordionDetails';
 const panelClasses = {
   root: `${PANEL_PREFIX}-root`,
 }
@@ -60,13 +60,13 @@ export const ToolbarSection = ({ title, props, summary, children }: any) => {
         <div className="px-6 w-full">
           <Grid container direction="row" alignItems="center" spacing={3}>
             <Grid item xs={4}>
-              <h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
+              <h5 className="text-sm text-bold-gray-1 text-left font-medium text-dark-gray">
                 {title}
               </h5>
             </Grid>
             {summary && props ? (
               <Grid item xs={8}>
-                <h5 className="text-light-gray-2 text-sm text-right text-dark-blue">
+                <h5 className="text-regular-gray-2 text-sm text-right text-dark-blue">
                   {summary(
                     props.reduce((acc: any, key: any) => {
                       acc[key] = nodeProps[key];
@@ -81,7 +81,7 @@ export const ToolbarSection = ({ title, props, summary, children }: any) => {
       </SummaryStyle>
       <AccordionDetails style={{ padding: '0px 24px 20px' }}>
         <Divider />
-        <Grid container spacing={1}>
+        <Grid container spacing={3}>
           {children}
         </Grid>
       </AccordionDetails>
