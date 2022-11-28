@@ -1,7 +1,9 @@
 import { useEditor } from '@craftjs/core';
-import { Tooltip } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Snackbar, Tooltip, Button, TextField } from '@mui/material';
+import copy from 'copy-to-clipboard';
+import lz from 'lzutf8';
 import cx from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Checkmark from '../../../public/icons/check.svg';
@@ -22,6 +24,7 @@ const HeaderDiv = styled.div`
 const Btn = styled.a`
   display: flex;
   align-items: center;
+  margin-right: 10px;
   padding: 5px 15px;
   border-radius: 3px;
   color: #fff;
@@ -52,11 +55,15 @@ const Item = styled.a<{ disabled?: boolean }>`
 `;
 
 export const Header = () => {
-  const { enabled, canUndo, canRedo, actions } = useEditor((state, query) => ({
+  const { enabled, canUndo, canRedo, actions, query } = useEditor((state, query) => ({
     enabled: state.options.enabled,
     canUndo: query.history.canUndo(),
     canRedo: query.history.canRedo(),
   }));
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<string | null>();
+  const [stateToLoad, setStateToLoad] = useState<string | null>(null);
 
   return (
     <HeaderDiv className="header text-white transition w-full">
@@ -77,6 +84,35 @@ export const Header = () => {
         )}
         <div className="flex">
           <Btn
+            className={cx([  
+              'copy-state-btn transition cursor-pointer',
+              {
+                'bg-primary': true,
+              },
+            ])}
+            onClick={() => {
+              const json = query.serialize();
+              copy(lz.encodeBase64(lz.compress(json)));
+              setSnackbarMessage('State copied to clipboard');
+            }}
+          >
+            {'Copy State'}
+          </Btn>
+          <Btn
+            className={cx([  
+              'load-state-btn transition cursor-pointer',
+              {
+                'bg-primary': true,
+              },
+              
+            ])}
+            onClick={() => {
+              setDialogOpen(true);
+            }}
+          >
+            {'Load State'}
+          </Btn>
+          <Btn
             className={cx([
               'transition cursor-pointer',
               {
@@ -91,6 +127,54 @@ export const Header = () => {
             {enabled ? <Checkmark /> : <Customize />}
             {enabled ? 'Finish Editing' : 'Edit'}
           </Btn>
+          <Snackbar
+            autoHideDuration={1000}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={!!snackbarMessage}
+            onClose={() => setSnackbarMessage(null)}
+            message={<span>{snackbarMessage}</span>}
+          />
+          <Dialog
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            fullWidth
+            maxWidth="md"
+          >
+            <DialogTitle id="alert-dialog-title">Load state</DialogTitle>
+            <DialogContent>
+              <TextField
+                multiline
+                fullWidth
+                placeholder='Paste the contents that was copied from the "Copy Current State" button'
+                size="small"
+                value={stateToLoad || ''}
+                onChange={(e) => setStateToLoad(e.target.value)}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setDialogOpen(false)}
+                color="primary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setDialogOpen(false);
+                  const json = lz.decompress(lz.decodeBase64(stateToLoad!));
+                  actions.deserialize(json);
+                  setSnackbarMessage('State loaded');
+                }}
+                color="primary"
+                autoFocus
+              >
+                Load
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     </HeaderDiv>
