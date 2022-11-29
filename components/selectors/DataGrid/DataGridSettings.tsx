@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ToolbarSection, ToolbarItem } from '../../editor';
+import { ToolbarSection, ToolbarItem, ToolbarTextInput } from '../../editor';
 import { ToolbarRadio } from '../../editor/Toolbar/ToolbarItems/ToolbarRadio';
 
-export const ContainerSettings = () => {
+export const DataGridSettings = () => {
   return (
     <React.Fragment>
       <ToolbarSection
@@ -18,8 +18,8 @@ export const ContainerSettings = () => {
       </ToolbarSection>
       <ToolbarSection
         title="Colors"
-        props={['background', 'color']}
-        summary={({ background, color }: any) => {
+        props={['background']}
+        summary={({ background }: any) => {
           return (
             <div className="flex flex-row-reverse">
               <div
@@ -29,14 +29,6 @@ export const ContainerSettings = () => {
                 }}
                 className="shadow-md flex-end w-6 h-6 text-center flex items-center rounded-full bg-black"
               >
-                <p
-                  style={{
-                    color: color && `rgba(${Object.values(color)})`,
-                  }}
-                  className="text-white w-full text-center"
-                >
-                  T
-                </p>
               </div>
             </div>
           );
@@ -48,7 +40,6 @@ export const ContainerSettings = () => {
           type="bg"
           label="Background"
         />
-        <ToolbarItem full={true} propKey="color" type="color" label="Text" />
       </ToolbarSection>
       <ToolbarSection
         title="Margin"
@@ -78,20 +69,6 @@ export const ContainerSettings = () => {
         <ToolbarItem propKey="padding" index={2} type="slider" label="Bottom" />
         <ToolbarItem propKey="padding" index={3} type="slider" label="Left" />
       </ToolbarSection>
-      <ToolbarSection title="Decoration" props={['radius', 'shadow']}>
-        <ToolbarItem
-          full={true}
-          propKey="radius"
-          type="slider"
-          label="Radius"
-        />
-        <ToolbarItem
-          full={true}
-          propKey="shadow"
-          type="slider"
-          label="Shadow"
-        />
-      </ToolbarSection>
       <ToolbarSection title="Alignment">
         <ToolbarItem
           propKey="flexDirection"
@@ -120,6 +97,10 @@ export const ContainerSettings = () => {
           <ToolbarRadio value="flex-end" label="Flex end" />
         </ToolbarItem>
       </ToolbarSection>
+      <ToolbarSection title="GraphQL">
+        <ToolbarItem propKey="graphQLQuery" type="text" label="GraphQL Query" full={true} multiline={true} />
+      </ToolbarSection>
+
     </React.Fragment>
   );
 };

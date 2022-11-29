@@ -126,14 +126,6 @@ export const Sidebar = () => {
             <Layers expandRootOnLoad={true} />
           </div>
         </SidebarItem>
-        <CarbonAdsContainer>
-          <script
-            async
-            type="text/javascript"
-            src="//cdn.carbonads.com/carbon.js?serve=CEAI453N&placement=craftjsorg"
-            id="_carbonads_js"
-          ></script>
-        </CarbonAdsContainer>
       </div>
     </SidebarDiv>
   );

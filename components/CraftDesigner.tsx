@@ -7,6 +7,7 @@ import { Viewport, RenderNode } from '../components/editor';
 import { Container, Text } from '../components/selectors';
 import { Button } from '../components/selectors/Button';
 import { Video } from '../components/selectors/Video';
+import { DataGridComponent } from './selectors/DataGrid';
 
 const theme = createTheme({
   typography: {
@@ -18,6 +19,9 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  palette: {
+    mode: 'light'
+  }
 });
 
 export const CraftDesigner = (props: any) => {
@@ -43,6 +47,7 @@ export const CraftDesigner = (props: any) => {
             Text,
             Button,
             Video,
+            DataGridComponent,
           }}
           enabled={enabled}
           onRender={RenderNode}
@@ -76,6 +81,7 @@ export const CraftDesigner = (props: any) => {
                     padding={['0', '20', '0', '20']}
                     custom={{ displayName: 'Heading' }}
                   >
+
                     <Text
                       fontSize="23"
                       fontWeight="400"

@@ -53,6 +53,7 @@ export type ToolbarTextInputProps = {
   type: string;
   onChange?: (value: any) => void;
   value?: any;
+  multiline?: boolean;
 };
 
 export const ToolbarTextInput = ({
@@ -61,6 +62,7 @@ export const ToolbarTextInput = ({
   prefix,
   label,
   type,
+  multiline,
   ...props
 }: ToolbarTextInputProps) => {
   const [internalValue, setInternalValue] = useState(value);
@@ -107,6 +109,54 @@ export const ToolbarTextInput = ({
           />
         </div>
       ) : null}
+      {multiline ? (
+        <TextField
+        label={label}
+        multiline
+        rows={4}
+        style={{ margin: 0, width: '100%', borderRadius: '0px' }}
+        value={internalValue || ''}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            onChange?.((e.target as any).value);
+          }
+        }}
+        onChange={(e: { target: { value: any; }; }) => {
+          setInternalValue(e.target.value);
+        }}
+        margin="dense"
+        variant="filled"
+        InputProps={{
+          classes,
+          disableUnderline: true,
+          startAdornment: ['color', 'bg'].includes(type) ? (
+            <InputAdornment
+              position="start"
+              style={{
+                position: 'absolute',
+                marginTop: '2px',
+                marginRight: '8px',
+              }}
+            >
+              <div
+                className="w-2 h-2 inline-block rounded-full relative"
+                style={{
+                  left: '15px',
+                  background: internalValue,
+                }}
+              />
+            </InputAdornment>
+          ) : null,
+        }}
+        InputLabelProps={{
+          classes: {
+            ...inputLabelClasses,
+          },
+          shrink: true,
+        }}
+        {...props}
+      />): 
+      (
       <TextField
         label={label}
         style={{ margin: 0, width: '100%' }}
@@ -150,7 +200,7 @@ export const ToolbarTextInput = ({
           shrink: true,
         }}
         {...props}
-      />
+      />)}
     </div>
   );
 };

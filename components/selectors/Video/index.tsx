@@ -2,7 +2,6 @@ import { useNode, useEditor } from '@craftjs/core';
 import React from 'react';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
-
 import { VideoSettings } from './VideoSettings';
 
 const YoutubeDiv = styled.div<any>`

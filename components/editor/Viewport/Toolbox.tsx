@@ -1,5 +1,6 @@
 import { EditorState, Element, useEditor } from '@craftjs/core';
-import { Tooltip } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip/Tooltip';
+import { DataGridComponent } from 'components/selectors/DataGrid';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,11 +10,16 @@ import SquareSvg from '../../../public/icons/toolbox/rectangle.svg';
 import TypeSvg from '../../../public/icons/toolbox/text.svg';
 import YoutubeSvg from '../../../public/icons/toolbox/video-line.svg';
 
+
+
 //Component classes
-import  { Button }   from '../../selectors/Button';
+import { Button }   from '../../selectors/Button';
 import { Container } from '../../selectors/Container';
 import { Text } from '../../selectors/Text';
 import { Video } from '../../selectors/Video';
+import TableViewIcon from '@mui/icons-material/TableView';
+
+
 
 const ToolboxDiv = styled.div<{ enabled: boolean }>`
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
@@ -57,8 +63,6 @@ export const Toolbox = () => {
                 is={Container}
                 background={{ r: 78, g: 78, b: 78, a: 1 }}
                 color={{ r: 0, g: 0, b: 0, a: 1 }}
-                height="300px"
-                width="300px"
               ></Element>
             )
           }
@@ -91,6 +95,13 @@ export const Toolbox = () => {
           <Tooltip title="Video" placement="right">
             <Item className="m-2 pb-2 cursor-pointer block" move>
               <YoutubeSvg />
+            </Item>
+          </Tooltip>
+        </div>
+        <div ref={(ref) => create(ref!, <DataGridComponent />)}>
+          <Tooltip title="Data Grid" placement="right">
+            <Item className="m-2 pb-2 cursor-pointer block" move>
+              <TableViewIcon />
             </Item>
           </Tooltip>
         </div>

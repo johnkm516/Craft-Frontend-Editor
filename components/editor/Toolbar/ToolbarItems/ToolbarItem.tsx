@@ -83,6 +83,7 @@ export type ToolbarItemProps = {
   index?: number;
   children?: React.ReactNode;
   type: string;
+  multiline?: boolean;
   onChange?: (value: any) => any;
 };
 export const ToolbarItem = ({
@@ -91,6 +92,7 @@ export const ToolbarItem = ({
   type,
   onChange,
   index,
+  multiline,
   ...props
 }: ToolbarItemProps) => {
   const {
@@ -108,6 +110,7 @@ export const ToolbarItem = ({
           <ToolbarTextInput
             {...props}
             type={type}
+            multiline={multiline}
             value={value}
             onChange={(value) => {
               setProp((props: any) => {

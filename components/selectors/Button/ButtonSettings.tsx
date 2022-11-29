@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ToolbarSection, ToolbarItem } from '../../editor';
-import { ToolbarRadio } from '../../editor/Toolbar/ToolbarRadio';
+import { ToolbarRadio } from '../../editor/Toolbar/ToolbarItems/ToolbarRadio';
 
 export const ButtonSettings = () => {
   return (
@@ -38,7 +38,11 @@ export const ButtonSettings = () => {
           type="bg"
           label="Background"
         />
-        <ToolbarItem full={true} propKey="color" type="color" label="Text" />
+        <ToolbarItem 
+          full={true} 
+          propKey="color" 
+          type="color" 
+          label="Text" />
       </ToolbarSection>
       <ToolbarSection
         title="Margin"

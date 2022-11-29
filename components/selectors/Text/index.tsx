@@ -25,7 +25,7 @@ export const Text = ({
 }: Partial<TextProps>) => {
   const {
     connectors: { connect },
-    setProp,
+    actions: { setProp },
   } = useNode();
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
@@ -36,7 +36,7 @@ export const Text = ({
       html={text!} // innerHTML of the editable div
       disabled={!enabled}
       onChange={(e) => {
-        setProp((prop) => (prop.text = e.target.value), 500);
+        setProp((prop: any) => (prop.text = e.target.value), 500);
       }} // use true to disable editing
       tagName="h2" // Use a custom HTML tag (uses a div by default)
       style={{

@@ -1,10 +1,10 @@
 import { useEditor } from '@craftjs/core';
 import React from 'react';
 
-export * from './ToolbarItem';
+export * from './ToolbarItems/ToolbarItem';
 export * from './ToolbarSection';
-export * from './ToolbarTextInput';
-export * from './ToolbarDropdown';
+export * from './ToolbarItems/ToolbarTextInput';
+export * from './ToolbarItems/ToolbarDropdown';
 
 export const Toolbar = () => {
   const { active, related } = useEditor((state, query) => {
