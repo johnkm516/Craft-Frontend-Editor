@@ -5,7 +5,9 @@ import { Resizer } from '../Resizer';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import styled from 'styled-components';
 import Box from '@mui/material/Box/Box';
-import { gql } from "@apollo/client";
+import { gql, useApolloClient, useQuery } from "@apollo/client";
+import ClientOnly from 'graphql/ClientOnly';
+import { apolloClient } from 'graphql/apollo-client';
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -110,6 +112,7 @@ const defaultProps = {
   height: 'auto',
 };
 
+
 export const DataGridComponent = (props: Partial<DataGridProps>) => {
   props = {
     ...defaultProps,
@@ -125,8 +128,46 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
     margin,
     graphQLQuery,
   } = props;
+  const client = useApolloClient();
 
-  console.log(graphQLQuery);
+  /*
+  client.query({
+    query: gql`
+      query Auth_findManyUser {
+        Auth_findManyUser {
+          id
+          createdAt
+          username
+          password
+          email
+          roles
+          googleId
+          googleProfile
+        }
+      }
+    `,
+  }).then(({ loading, error, data }) => {
+    console.log('loading:', loading);
+    console.log('error:', error);
+    console.log('data:', data);
+  });
+  */
+  const { loading, error, data } = useQuery(
+    gql`
+      query Auth_findManyUser {
+        Auth_findManyUser {
+          id
+          createdAt
+          username
+          password
+          email
+          roles
+          googleId
+          googleProfile
+        }
+      }`
+    , {client: client });
+
 
   return (
     <Resizer
@@ -141,13 +182,33 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
         flex: fillSpace === 'yes' ? 1 : 'unset',
       }}
     >
-      <DataGrid
+      {loading ? (<DataGrid
+        loading={loading}
         components={{
           Toolbar: GridToolbar,
           NoRowsOverlay: CustomNoRowsOverlay,
-        }} columns={[]} rows={[]} />
+        }} 
+        columns={[]}
+        rows={[]} 
+      />) : 
+      (<DataGrid
+        components={{
+          Toolbar: GridToolbar,
+          NoRowsOverlay: CustomNoRowsOverlay,
+        }}
+        
+        columns={data.Auth_findManyUser.map((element: any) => (
+          Object.keys(element).map(key => {
+            return { field: key, width: 150 }
+          })
+        ))[0]}  
+        
+        //columns={[{ field: "hasdffasdf", width: 150 }]}
+        rows={[]} 
+      />)}
     </Resizer>
-  );
+  )
+  
 };
 
 DataGridComponent.craft = {
