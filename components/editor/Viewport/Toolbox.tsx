@@ -1,22 +1,23 @@
 
 import { EditorState, Element, useEditor } from '@craftjs/core';
 import Tooltip from '@mui/material/Tooltip/Tooltip';
-import { DataGridComponent } from 'components/selectors/DataGrid';
 import React from 'react';
 import styled from 'styled-components';
 
 //Component Icons
-import ButtonSvg from '../../../public/icons/toolbox/button.svg';
-import SquareSvg from '../../../public/icons/toolbox/rectangle.svg';
-import TypeSvg from '../../../public/icons/toolbox/text.svg';
-import YoutubeSvg from '../../../public/icons/toolbox/video-line.svg';
+
+import IndeterminateCheckBoxRoundedIcon from '@mui/icons-material/IndeterminateCheckBoxRounded';
+import CropSquareIcon from '@mui/icons-material/CropSquare';
+import TextFieldsIcon from '@mui/icons-material/TextFields';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TableViewIcon from '@mui/icons-material/TableView';
 
 //Component classes
 import { Button }   from '../../selectors/Button';
 import { Container } from '../../selectors/Container';
 import { Text } from '../../selectors/Text';
 import { Video } from '../../selectors/Video';
-import TableViewIcon from '@mui/icons-material/TableView';
+import { DataGridComponent } from '../../selectors/DataGrid';
 
 
 
@@ -68,7 +69,7 @@ export const Toolbox = () => {
         >
           <Tooltip title="Container" placement="right">
             <Item className="m-2 pb-2 cursor-pointer block" move>
-              <SquareSvg />
+              <CropSquareIcon />
             </Item>
           </Tooltip>
         </div>
@@ -79,21 +80,21 @@ export const Toolbox = () => {
         >
           <Tooltip title="Text" placement="right">
             <Item className="m-2 pb-2 cursor-pointer block" move>
-              <TypeSvg />
+              <TextFieldsIcon />
             </Item>
           </Tooltip>
         </div>
         <div ref={(ref) => create(ref!, <Button />)}>
           <Tooltip title="Button" placement="right">
             <Item className="m-2 pb-2 cursor-pointer block" move>
-              <ButtonSvg />
+              <IndeterminateCheckBoxRoundedIcon />
             </Item>
           </Tooltip>
         </div>
         <div ref={(ref) => create(ref!, <Video />)}>
           <Tooltip title="Video" placement="right">
             <Item className="m-2 pb-2 cursor-pointer block" move>
-              <YoutubeSvg />
+              <YouTubeIcon />
             </Item>
           </Tooltip>
         </div>

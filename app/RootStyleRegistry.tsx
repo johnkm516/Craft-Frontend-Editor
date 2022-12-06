@@ -1,21 +1,31 @@
 'use client';
 
-import { useStyledComponentsRegistry } from '../utils/styled-components';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
+import { useState } from 'react';
 
-export default function RootStyleRegistry({
+export default function EmotionRootStyleRegistry({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [StyledComponentsRegistry, styledComponentsFlushEffect] =
-    useStyledComponentsRegistry();
-
-  useServerInsertedHTML(() => {
-    console.log(styledComponentsFlushEffect());
-    return <>{styledComponentsFlushEffect()}</>;
+  const [cache] = useState(() => {
+    const cache = createCache({ key: 'css' });
+    cache.compat = true;
+    return cache;
   });
 
+  useServerInsertedHTML(() => {
+    return (
+      <style
+        data-emotion={`${cache.key} ${Object.keys(cache.inserted).join(' ')}`}
+        dangerouslySetInnerHTML={{
+          __html: Object.values(cache.inserted).join(' '),
+        }}
+      />
+    );
+  });
 
-  return <StyledComponentsRegistry>{children}</StyledComponentsRegistry>;
+  return <CacheProvider value={cache}>{children}</CacheProvider>;
 }
