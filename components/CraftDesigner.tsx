@@ -1,13 +1,13 @@
 import { Editor, Frame, Element } from '@craftjs/core';
 import { NextSeo } from 'next-seo';
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { Viewport, RenderNode } from '../components/editor';
 import { Container, Text } from '../components/selectors';
 import { Button } from '../components/selectors/Button';
 import { Video } from '../components/selectors/Video';
 import { DataGridComponent } from './selectors/DataGrid';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   typography: {

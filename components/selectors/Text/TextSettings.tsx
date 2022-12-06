@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import { capitalize, weightDescription } from '../../../utils/text';

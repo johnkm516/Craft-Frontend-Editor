@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import { DataGridSettings } from './DataGridSettings';
@@ -6,8 +7,6 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import styled from 'styled-components';
 import Box from '@mui/material/Box/Box';
 import { gql, useApolloClient, useQuery } from "@apollo/client";
-import ClientOnly from 'graphql/ClientOnly';
-import { apolloClient } from 'graphql/apollo-client';
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -131,43 +130,29 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
   const client = useApolloClient();
 
   /*
-  client.query({
-    query: gql`
-      query Auth_findManyUser {
-        Auth_findManyUser {
-          id
-          createdAt
-          username
-          password
-          email
-          roles
-          googleId
-          googleProfile
-        }
-      }
-    `,
-  }).then(({ loading, error, data }) => {
-    console.log('loading:', loading);
-    console.log('error:', error);
-    console.log('data:', data);
-  });
+  query Auth_findManyUser {
+    Auth_findManyUser {
+      id
+      createdAt
+      username
+      password
+      email
+      roles
+      googleId
+      googleProfile
+    }
+  }
   */
-  const { loading, error, data } = useQuery(
+  const { loading, error, data } = graphQLQuery ? useQuery(
     gql`
-      query Auth_findManyUser {
-        Auth_findManyUser {
-          id
-          createdAt
-          username
-          password
-          email
-          roles
-          googleId
-          googleProfile
-        }
-      }`
-    , {client: client });
+      ${graphQLQuery}`
+    , {client: client }) : { loading: undefined , error: undefined , data: undefined};
 
+  /*
+  if (!loading && data) {
+    console.log(data);
+  }
+  */
 
   return (
     <Resizer
@@ -182,7 +167,7 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
         flex: fillSpace === 'yes' ? 1 : 'unset',
       }}
     >
-      {loading ? (<DataGrid
+      {loading || !data ? (<DataGrid
         loading={loading}
         components={{
           Toolbar: GridToolbar,
@@ -202,8 +187,6 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
             return { field: key, width: 150 }
           })
         ))[0]}  
-        
-        //columns={[{ field: "hasdffasdf", width: 150 }]}
         rows={[]} 
       />)}
     </Resizer>

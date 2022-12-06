@@ -1,3 +1,5 @@
+'use client'
+
 import { useEditor } from '@craftjs/core';
 import { Layers } from '@craftjs/layers';
 import React, { useState } from 'react';
