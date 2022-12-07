@@ -1,7 +1,8 @@
 
-import { useNode, useEditor } from '@craftjs/core';
+import { useNode, useEditor, EditorState } from '@craftjs/core';
 import React from 'react';
 import ContentEditable from 'react-contenteditable';
+import { useAppSelector } from 'redux/hooks';
 
 import { TextSettings } from './TextSettings';
 
@@ -13,6 +14,7 @@ export type TextProps = {
   shadow: number;
   text: string;
   margin: [string, string, string, string];
+  listenNodeID?: string;
 };
 
 export const Text = ({
@@ -23,21 +25,27 @@ export const Text = ({
   shadow,
   text,
   margin,
+  listenNodeID,
 }: Partial<TextProps>) => {
   const {
     connectors: { connect },
     actions: { setProp },
   } = useNode();
+
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
   }));
-
+  const nodeTreeState: Map<string, string | number> = useAppSelector((state) => (state.Inputs.nodes));
+  const value = (listenNodeID && listenNodeID != '' && nodeTreeState.has(listenNodeID)) ? nodeTreeState.get(listenNodeID) as string : undefined;
+  if (value) {
+    
+  }
   const node = useNode();
   return (
     <ContentEditable
       id={node.id}
       innerRef={connect}
-      html={text!} // innerHTML of the editable div
+      html={value ? value : text!} // innerHTML of the editable div
       disabled={!enabled}
       onChange={(e) => {
         setProp((prop: any) => (prop.text = e.target.value), 500);

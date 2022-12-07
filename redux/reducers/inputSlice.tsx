@@ -6,20 +6,16 @@ interface ComponentInput {
     data: string | number
 }
 
-interface NodeMap {
-  [nodeID: string]: string | number
-}
-
 export const inputSlice = createSlice({
   name: 'InputEvent',
   initialState: {
-    nodes: {}
-  } as { nodes: NodeMap},
+    nodes: new Map()
+  } as { nodes: Map<string, string | number>},
   reducers: {
     commit(state, action: PayloadAction<ComponentInput>) {
       if (action.payload.nodeID && action.payload.nodeID != '') {
         console.log(action.payload.nodeID + " : " + action.payload.data);
-        state.nodes[action.payload.nodeID] = action.payload.data;
+        state.nodes.set(action.payload.nodeID, action.payload.data);
         return state;
       }
     }

@@ -129,24 +129,11 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
   } = props;
   const client = useApolloClient();
 
-  /*
-  query Auth_findManyUser {
-    Auth_findManyUser {
-      id
-      createdAt
-      username
-      password
-      email
-      roles
-      googleId
-      googleProfile
-    }
-  }
-  */
+
   const { loading, error, data } = graphQLQuery ? useQuery(
-    gql`
-      ${graphQLQuery}`
-    , {client: client }) : { loading: undefined , error: undefined , data: undefined};
+  gql`
+    ${graphQLQuery}`
+  , {client: client }) : { loading: undefined , error: undefined , data: undefined};
 
   /*
   if (!loading && data) {

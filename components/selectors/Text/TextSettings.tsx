@@ -75,6 +75,9 @@ export const TextSettings = () => {
           label="Shadow"
         />
       </ToolbarSection>
+      <ToolbarSection title="Update From Node">
+        <ToolbarItem propKey="listenNodeID" type="text" label="Node ID" full={true}/>
+      </ToolbarSection>
     </React.Fragment>
   );
 };

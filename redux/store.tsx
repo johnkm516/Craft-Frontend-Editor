@@ -5,7 +5,7 @@ import { logger } from './middleware/logger'
 import inputSlice from './reducers/inputSlice'
 
 const rootReducer = combineReducers({ 
-    counter: inputSlice
+    Inputs: inputSlice
 })
 
 export const store: any = configureStore({

@@ -65,8 +65,8 @@ export const ButtonSettings = () => {
           <ToolbarRadio value="outline" label="Outline" />
         </ToolbarItem>
       </ToolbarSection>
-      <ToolbarSection title="Listen to Node">
-        <ToolbarItem propKey="nodeID" type="text" label="Node ID" full={true}/>
+      <ToolbarSection title="Commit From Node">
+        <ToolbarItem propKey="commitNodeID" type="text" label="Node ID" full={true}/>
       </ToolbarSection>
     </React.Fragment>
   );

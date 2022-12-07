@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { ButtonSettings } from './ButtonSettings';
 
 import { Text } from '../Text';
-import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { commit } from 'redux/reducers/inputSlice';
+import { useAppDispatch } from 'redux/hooks';
 
 type ButtonProps = {
   background?: Record<'r' | 'g' | 'b' | 'a', number>;
@@ -42,7 +42,7 @@ export const Button: UserComponent<ButtonProps> = (props: any) => {
   }));
 
   const { text, textComponent, color, commitNodeID, ...otherProps } = props;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { editorState } = useEditor((state: EditorState) => {
     return { editorState: state };
   });
