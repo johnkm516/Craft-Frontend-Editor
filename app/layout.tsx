@@ -1,5 +1,5 @@
 import { Providers } from './providers'
-import EmotionRootStyleRegistry from './RootStyleRegistry';
+import RootStyleRegistry from './RootStyleRegistry';
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -13,9 +13,9 @@ export default function RootLayout({
         <body>
           <main>
               <Providers>
-                <EmotionRootStyleRegistry>
+                <RootStyleRegistry>
                   {children}
-                </EmotionRootStyleRegistry>
+                </RootStyleRegistry>
               </Providers>
           </main>
         </body>

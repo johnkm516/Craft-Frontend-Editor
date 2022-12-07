@@ -1,5 +1,5 @@
 
-import { UserComponent, useNode } from '@craftjs/core';
+import { UserComponent, useNode, useEditor, EditorState } from '@craftjs/core';
 import cx from 'classnames';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { ButtonSettings } from './ButtonSettings';
 
 import { Text } from '../Text';
+import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { commit } from 'redux/reducers/inputSlice';
 
 type ButtonProps = {
   background?: Record<'r' | 'g' | 'b' | 'a', number>;
@@ -15,6 +17,7 @@ type ButtonProps = {
   margin?: any[];
   text?: string;
   textComponent?: any;
+  commitNodeID?: string;
 };
 
 const StyledButton = styled.button<ButtonProps>`
@@ -38,9 +41,20 @@ export const Button: UserComponent<ButtonProps> = (props: any) => {
     selected: node.events.selected,
   }));
 
-  const { text, textComponent, color, ...otherProps } = props;
+  const { text, textComponent, color, commitNodeID, ...otherProps } = props;
+  const dispatch = useDispatch();
+  const { editorState } = useEditor((state: EditorState) => {
+    return { editorState: state };
+  });
+
   return (
     <StyledButton
+      onClick={(e) => {
+        const node = editorState.nodes[commitNodeID];
+        node ? 
+          dispatch(commit({nodeID: commitNodeID, data: node.data.props.text})) :
+          false
+      }}
       ref={connect}
       className={cx([
         'rounded w-full px-4 py-2',

@@ -5,7 +5,7 @@ import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
 import { useState } from 'react';
 
-export default function EmotionRootStyleRegistry({
+export default function RootStyleRegistry({
   children,
 }: {
   children: React.ReactNode;

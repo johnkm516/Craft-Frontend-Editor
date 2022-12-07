@@ -31,8 +31,11 @@ export const Text = ({
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
   }));
+
+  const node = useNode();
   return (
     <ContentEditable
+      id={node.id}
       innerRef={connect}
       html={text!} // innerHTML of the editable div
       disabled={!enabled}
