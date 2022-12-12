@@ -12,7 +12,7 @@ import LayerIcon from '../../../../public/icons/layers.svg';
 import { Toolbar } from '../../Toolbar';
 
 export const SidebarDiv = styled.div<{ enabled: boolean }>`
-  width: 280px;
+  width: 400px;
   opacity: ${(props) => (props.enabled ? 1 : 0)};
   background: #fff;
   margin-right: ${(props) => (props.enabled ? 0 : -280)}px;

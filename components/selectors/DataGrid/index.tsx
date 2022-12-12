@@ -7,6 +7,9 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import styled from 'styled-components';
 import Box from '@mui/material/Box/Box';
 import { gql, useApolloClient, useQuery } from "@apollo/client";
+import { isValid } from 'utils/graphQLValidator';
+import { getGraphQLArgs } from 'utils/graphQLGetArgs';
+import { replaceGraphQLArgs } from 'utils/graphQLReplaceArgs';
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -96,6 +99,8 @@ export type DataGridProps = {
   marginBottom: number;
   marginRight: number;
   graphQLQuery: string;
+  graphQLVariableMap: Map<string, string>;
+  columnMapping: Map<string, string>;
 };
 
 
@@ -129,12 +134,17 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
   } = props;
   const client = useApolloClient();
 
-
-  const { loading, error, data } = graphQLQuery ? useQuery(
+  const { loading, error, data } = (graphQLQuery && isValid(graphQLQuery) === true) ? useQuery(
   gql`
     ${graphQLQuery}`
   , {client: client }) : { loading: undefined , error: undefined , data: undefined};
-
+  if (graphQLQuery) {
+    console.log(getGraphQLArgs(graphQLQuery));
+    console.log(replaceGraphQLArgs(graphQLQuery, new Map([
+      ['take', 'abcdefg'],
+      ['hghg', 'lol'],
+    ])));
+  }
   /*
   if (!loading && data) {
     console.log(data);

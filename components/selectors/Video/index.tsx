@@ -1,9 +1,14 @@
 
-import { useNode, useEditor } from '@craftjs/core';
+import { useNode, useEditor, UserComponent } from '@craftjs/core';
 import React from 'react';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import { VideoSettings } from './VideoSettings';
+
+export type YoutubeVideoProps = {
+  videoId: string
+};
+
 
 const YoutubeDiv = styled.div<any>`
   width: 100%;
@@ -17,23 +22,21 @@ const YoutubeDiv = styled.div<any>`
     // height:100%!important;
   }
 `;
-
-export const Video = (props: any) => {
+export const Video = (props: Partial<YoutubeVideoProps>) => {
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
   }));
+
   const {
     connectors: { connect },
   } = useNode((node) => ({
     selected: node.events.selected,
   }));
 
-  const { videoId } = props;
-
   return (
     <YoutubeDiv ref={connect} enabled={enabled}>
       <YouTube
-        videoId={videoId}
+        videoId={props.videoId}
         opts={{
           width: '100%',
           height: '100%',
@@ -46,7 +49,7 @@ export const Video = (props: any) => {
 Video.craft = {
   displayName: 'Video',
   props: {
-    videoId: 'IwzUs1IMdyQ',
+    videoId: '',
   },
   related: {
     toolbar: VideoSettings,

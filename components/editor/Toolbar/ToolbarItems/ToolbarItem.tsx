@@ -4,6 +4,7 @@ import { Grid, Slider, RadioGroup, styled } from '@mui/material';
 import React from 'react';
 
 import { ToolbarDropdown } from './ToolbarDropdown';
+import { ToolbarGraphQLBinder } from './ToolbarGraphQLBinder';
 import { ToolbarTextInput } from './ToolbarTextInput';
 
 
@@ -171,6 +172,19 @@ export const ToolbarItem = ({
                   (props[propKey!] = onChange ? onChange(value) : value)
               )
             }
+            {...props}
+          />
+        ) : type === 'graphQLBinder' ? (
+          <ToolbarGraphQLBinder
+            onChange={(value: any) => {
+              setProp((props: any) => {
+                if (Array.isArray(propValue)) {
+                  props[propKey!][index!] = onChange ? onChange(value) : value;
+                } else {
+                  props[propKey!] = onChange ? onChange(value) : value;
+                }
+              }, 500);
+            }}
             {...props}
           />
         ) : null}

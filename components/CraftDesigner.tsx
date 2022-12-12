@@ -103,7 +103,6 @@ export const CraftDesigner = (props: any) => {
                     ></Text>
                   </Element>
                 </Element>
-
                 <Element
                   canvas
                   is={Container}

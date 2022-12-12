@@ -1,9 +1,8 @@
 
-import { useNode, useEditor, EditorState } from '@craftjs/core';
+import { useNode, useEditor } from '@craftjs/core';
 import React from 'react';
 import ContentEditable from 'react-contenteditable';
 import { useAppSelector } from 'redux/hooks';
-
 import { TextSettings } from './TextSettings';
 
 export type TextProps = {

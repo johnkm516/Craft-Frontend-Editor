@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 
 import { ToolbarSection, ToolbarItem, ToolbarTextInput } from '../../editor';
@@ -99,7 +100,7 @@ export const DataGridSettings = () => {
         </ToolbarItem>
       </ToolbarSection>
       <ToolbarSection title="GraphQL">
-        <ToolbarItem propKey="graphQLQuery" type="text" label="GraphQL Query" full={true} multiline={true} />
+        <ToolbarItem propKey="variableMap" type="graphQLBinder" full={true} />
       </ToolbarSection>
 
     </React.Fragment>

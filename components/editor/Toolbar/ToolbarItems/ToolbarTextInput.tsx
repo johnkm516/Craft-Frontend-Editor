@@ -64,7 +64,7 @@ export const ToolbarTextInput = ({
   type,
   multiline,
   ...props
-}: ToolbarTextInputProps) => {
+}: Partial<ToolbarTextInputProps>) => {
   const [internalValue, setInternalValue] = useState(value);
   const [active, setActive] = useState(false);
   const { classes } = useStyles();
@@ -129,7 +129,7 @@ export const ToolbarTextInput = ({
         InputProps={{
           classes,
           disableUnderline: true,
-          startAdornment: ['color', 'bg'].includes(type) ? (
+          startAdornment: ['color', 'bg'].includes(type!) ? (
             <InputAdornment
               position="start"
               style={{
@@ -174,7 +174,7 @@ export const ToolbarTextInput = ({
         InputProps={{
           classes,
           disableUnderline: true,
-          startAdornment: ['color', 'bg'].includes(type) ? (
+          startAdornment: ['color', 'bg'].includes(type!) ? (
             <InputAdornment
               position="start"
               style={{
