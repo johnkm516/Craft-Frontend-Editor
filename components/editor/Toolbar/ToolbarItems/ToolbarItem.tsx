@@ -7,7 +7,6 @@ import { ToolbarDropdown } from './ToolbarDropdown';
 import { ToolbarGraphQLBinder } from './ToolbarGraphQLBinder';
 import { ToolbarTextInput } from './ToolbarTextInput';
 
-
 const SLIDER_PREFIX = 'MuiSlider';
 const sliderClasses = {
   root: `${SLIDER_PREFIX}-root`,
@@ -26,7 +25,6 @@ const SliderStyle = styled(Slider)(({}) => ({
       height: 3,
       padding: '5px 0',
       width: '100%',
-
     },
     [`& .${sliderClasses.thumb}`]: {
       height: 14,

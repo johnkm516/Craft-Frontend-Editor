@@ -53,6 +53,7 @@ export const Button: UserComponent<ButtonProps> = (props: any) => {
         const node = editorState.nodes[commitNodeID];
         node ? 
           dispatch(commit({nodeID: commitNodeID, data: node.data.props.text})) :
+   
           false
       }}
       ref={connect}

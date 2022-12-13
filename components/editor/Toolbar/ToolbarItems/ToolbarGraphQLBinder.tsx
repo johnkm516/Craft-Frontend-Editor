@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Divider } from '@mui/material';
 import {
   DataGrid,
   GridRenderCellParams,
@@ -9,7 +10,7 @@ import { useGridApiContext } from '@mui/x-data-grid-pro';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-
+import { getGraphQLArgs } from 'utils/graphQLGetArgs';
 
 
 function SelectEditInputCell(props: GridRenderCellParams) {
@@ -58,17 +59,11 @@ export const ToolbarGraphQLBinder = ({
 
   return (
     <div style={{ height: 300, width: '100%' }}>
-      <DataGrid
-        density='compact'
-        rows={rows}
-        columns={columns}
-        experimentalFeatures={{ newEditingApi: true }}
-      />
       <TextField
         label="GraphQL Query"
         multiline
         rows={4}
-        style={{ margin: 0, width: '100%', borderRadius: '0px' }}
+        style={{ marginBottom: 10, width: '100%', borderRadius: '0px' }}
         value={internalValue || ''}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -81,9 +76,18 @@ export const ToolbarGraphQLBinder = ({
         margin="dense"
         variant="filled"
       />
+
+      <Divider />
+
+      <DataGrid
+        density='compact'
+        rows={rows}
+        columns={columns}
+        experimentalFeatures={{ newEditingApi: true }}
+      />
       <Button
         onClick={() => 
-            console.log("here")
+            console.log(getGraphQLArgs(internalValue))
         }
         color="primary"
         >

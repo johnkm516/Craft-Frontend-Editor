@@ -1,5 +1,7 @@
 import { Providers } from './providers'
-import RootStyleRegistry from './RootStyleRegistry';
+import StyledComponentsRegistry from './StyledComponentsRegistry';
+
+//const StyledComponentsRegistry = lazy(() => import('./StyledComponentsRegistry'));
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -13,9 +15,9 @@ export default function RootLayout({
         <body>
           <main>
               <Providers>
-                <RootStyleRegistry>
-                  {children}
-                </RootStyleRegistry>
+                  <StyledComponentsRegistry>
+                    {children}
+                  </StyledComponentsRegistry>
               </Providers>
           </main>
         </body>

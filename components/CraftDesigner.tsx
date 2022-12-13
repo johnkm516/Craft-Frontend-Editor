@@ -24,7 +24,7 @@ const theme = createTheme({
   }
 });
 
-export const CraftDesigner = (props: any) => {
+const CraftDesigner = (props: any) => {
     const {
         enabled = true,
     } = props;
@@ -346,3 +346,4 @@ export const CraftDesigner = (props: any) => {
     </ThemeProvider>
   );
 }
+export default CraftDesigner
