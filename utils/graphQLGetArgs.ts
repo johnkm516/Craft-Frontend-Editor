@@ -19,6 +19,5 @@ export const getGraphQLArgs = (query: string | DocumentNode) => {
     const args: string[] = deepSearchItems(graphQLQuery, 'kind', (k, v) => v === 'Argument').map(element => {
         return element.name.value;
     });
-    console.log(graphQLQuery);
     return args;
   };

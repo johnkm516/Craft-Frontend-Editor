@@ -2,7 +2,7 @@
 
 //import { CraftDesigner } from "components/CraftDesigner";
 import { lazy, Suspense } from "react";
-import RingLoader from "react-spinners/RingLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const CraftDesigner = lazy(() => import('components/CraftDesigner'));
 
@@ -17,10 +17,10 @@ export default function CraftEditorClient() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh',
+        height: '100vh'
       }}
     >
-        <RingLoader color="hsla(222, 100%, 42%, 1)" />
+        <ScaleLoader color="rgba(38, 128, 235, 1)" height="35" width="5" />
     </div>
     )}>
       <CraftDesigner/>

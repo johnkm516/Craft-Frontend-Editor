@@ -40,9 +40,9 @@ const getNewToken = async () => {
     query: GET_AUTH_TOKEN,
     variables: {
       data: {
-        password: "hansae1!",
+        password: process.env.NEXT_PUBLIC_PASSWORD,
         rememberMe: true,
-        username: "johnkim"
+        username: process.env.NEXT_PUBLIC_USERNAME
       }
     },
   })!
@@ -74,7 +74,6 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
                 }
 
                 // Cache shared with main client instance
-                console.log(GET_AUTH_TOKEN);
                 renewTokenApiClient!.writeQuery({
                     query: GET_AUTH_TOKEN,
                     data: {

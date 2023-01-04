@@ -93,7 +93,6 @@ export const Header = () => {
             ])}
             onClick={() => {
               const json = query.serialize();
-              console.log(json);
               copy(lz.encodeBase64(lz.compress(json)));
               setSnackbarMessage('State copied to clipboard');
             }}

@@ -7,9 +7,6 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import styled from 'styled-components';
 import Box from '@mui/material/Box/Box';
 import { gql, useApolloClient, useQuery } from "@apollo/client";
-import { isValid } from 'utils/graphQLValidator';
-import { getGraphQLArgs } from 'utils/graphQLGetArgs';
-import { replaceGraphQLArgs } from 'utils/graphQLReplaceArgs';
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -99,8 +96,6 @@ export type DataGridProps = {
   marginBottom: number;
   marginRight: number;
   graphQLQuery: string;
-  graphQLVariableMap: Map<string, string>;
-  columnMapping: Map<string, string>;
 };
 
 
@@ -134,22 +129,11 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
   } = props;
   const client = useApolloClient();
 
-  const { loading, error, data } = (graphQLQuery && isValid(graphQLQuery) === true) ? useQuery(
+
+  const { loading, error, data } = graphQLQuery ? useQuery(
   gql`
     ${graphQLQuery}`
   , {client: client }) : { loading: undefined , error: undefined , data: undefined};
-  if (graphQLQuery) {
-    console.log(getGraphQLArgs(graphQLQuery));
-    console.log(replaceGraphQLArgs(graphQLQuery, new Map([
-      ['take', 'abcdefg'],
-      ['hghg', 'lol'],
-    ])));
-  }
-  /*
-  if (!loading && data) {
-    console.log(data);
-  }
-  */
 
   return (
     <Resizer
@@ -178,7 +162,37 @@ export const DataGridComponent = (props: Partial<DataGridProps>) => {
           Toolbar: GridToolbar,
           NoRowsOverlay: CustomNoRowsOverlay,
         }}
-        
+
+        /*
+        My query that I input in the editor during runtime : 
+        query Query {
+          Auth_findManyUser {
+            id
+            lastName
+            firstName
+          }
+        }
+
+        The result of that query : 
+        {
+          "data": {
+            "Auth_findManyUser": [
+              {
+                "id": 1,
+                "lastName": "Kim",
+                "firstName": "John"
+              },
+              {
+                "id": 3,
+                "lastName": "Lee",
+                "firstName": "Bob"
+              }
+            ]
+          }
+        }
+        */
+        //I hard-coded the data access here, but you can add another component customizer in the sidebar to access data during runtime, or parse the input GraphQL query. 
+        //It all depends on your resolver and what your query result looks like.
         columns={data.Auth_findManyUser.map((element: any) => (
           Object.keys(element).map(key => {
             return { field: key, width: 150 }

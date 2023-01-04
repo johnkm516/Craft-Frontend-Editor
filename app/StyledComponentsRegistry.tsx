@@ -20,7 +20,6 @@ export default function StyledComponentsRegistry({
   }, []);
   
   useServerInsertedHTML(() => {
-    console.log("here");
     const styles = styledComponentsStyleSheet.getStyleElement();
     //@ts-ignore
     styledComponentsStyleSheet.instance.clearTag();
@@ -37,6 +36,5 @@ export default function StyledComponentsRegistry({
         </StyleSheetManager>
       )}
     </>)
-
   );
 }
