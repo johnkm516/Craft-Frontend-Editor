@@ -19,7 +19,7 @@ You also need to modify the GraphQL endpoint in `\craftjs-website-generator\grap
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to access the editor. 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/1.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/1.png?raw=true)
 
 - The left sidebar contains icons of components. Drag and drop a component into the canvas to create a new component node. 
 - The topbar contains `Undo`, `Redo`, `Copy State`, `Load State` buttons. You can click `Copy State` which copies an encoded JSON string that represents the current page layout into your clipboard. You can then use `Load State` to paste this string load your layout.
@@ -29,21 +29,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to access 
 
 I created an attribute customizer called `Update From Node` for Text component and Button component. My implementation sets the editor's node ID (unique ID which represents a specific component called `nodes`) as the `id` attribute on the DOM. Open your browser's developer console (F12 on Chrome and Edge), and use the element selector to select a Text component : 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/2.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/2.png?raw=true)
 
 The text node I selected has a node id of `7ptPPnp5ht`. 
 
 Select / create another Text node on the editor. This node will listen for data changes of another Text node (in my case `7ptPPnp5ht`), and change its value to this node's value. Copy and paste the node id into the `Update From Node` customizer in the right sidebar and press enter : 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/3.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/3.png?raw=true)
 
 Select / create a Button node on the editor. This Button node will propagate the `Update From Node` when clicked. Same as above, copy and paste the node id into the `Commit From Node` customizer of the Button node and press enter : 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/4.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/4.png?raw=true)
 
 Click on the button in the canvas. The text node will update its value to the node that it is listening to! 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/5.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/5.png?raw=true)
 
 This functionality is implemented using Redux. You can customize this functionality however you wish, such as query backend data on button click and update a different component, or implement it some other way without using Redux if you do not like how I implemented it. 
 
@@ -88,7 +88,7 @@ In `\craftjs-website-generator\components\selectors\DataGrid\index.tsx`, I added
     }
     */
     //I hard-coded the data access here, but you can add another component customizer in the sidebar to access data during runtime, or parse the input GraphQL query. 
-    //It all depends on your resolver and what your query result looks like.
+    //It all depends on your resolver and what your query result looks like.lastName
     columns={data.Auth_findManyUser.map((element: any) => (
         Object.keys(element).map(key => {
         return { field: key, width: 150 }
@@ -114,7 +114,7 @@ query Query {
 
 the columns of the data table are populated dynamically during runtime : 
 
-![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/base/assets/6.png?raw=true)
+![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/6.png?raw=true)
 
 ### Proof 3 : Save state and reload state, including all attributes and dynamic binding from Proof 1 and Proof 2. 
 
