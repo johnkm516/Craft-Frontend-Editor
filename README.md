@@ -126,8 +126,8 @@ the columns of the data table are populated dynamically during runtime :
 
 This means that :
 
-- Instead of `Copy State`, modify the functionality to save state to a DB instead, along with a page route, all during runtime. You could add "last modified" and "modified by" columns to your database table and save / load previous version of pages.
-- Implementing a dynamic router which routes URLs to page layouts from the DB during runtime means you can create entire websites using this editor without any coding, provided you implement all the components and customizers you need beforehand, and add a "Add page with route" functionality.
+- Instead of `Copy State`, you could modify the functionality to save state to a DB instead, along with a page route, all during runtime. You could add "last modified" and "modified by" columns to your database table and save / load previous version of pages.
+- You could Implement a dynamic router which routes URLs to page layouts from the DB during runtime means you can create entire websites using this editor without any coding, provided you implement all the components and customizers you need beforehand, and add a "Add page with route" functionality.
 
 
 
