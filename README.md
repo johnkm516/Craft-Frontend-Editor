@@ -27,7 +27,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to access 
 
 ### Proof 1 : Dynamically bind data changes on events
 
-I created an attribute customizer called `Update From Node` for Text component and Button component. My implementation sets the editor's node ID (unique ID which represents a specific component called `nodes`) as the `id` attribute on the DOM. Open your browser's developer console (F12 on Chrome and Edge), and use the element selector to select a Text component : 
+I created an attribute customizer called `Update From Node` for the Text component and `Commit From Node` for the Button component. My implementation sets the editor's node ID (unique ID which represents a specific component called `nodes`) as the `id` attribute on the DOM. Open your browser's developer console (F12 on Chrome and Edge), and use the element selector to select a Text component : 
 
 ![alt text](https://github.com/johnkm516/Craft-Frontend-Editor/blob/main/assets/2.png?raw=true)
 
