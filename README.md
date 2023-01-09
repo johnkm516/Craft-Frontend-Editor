@@ -9,7 +9,7 @@ This is a very very rough proof of concept implementation built using ReactJS, N
 
 While the implementation is rough the framework is there, so you can use this project as a base for your own project if you want. 
 
-## Proof of Concept
+## Instructions and Editor Layout
 
 Clone the repository and download dependencies using `npm i` in the project directory. Use `npm run dev` to start the app. 
 This sample uses Apollo Client to implement a dynamic GraphQL query. My test backend has auth built-in, so I have a `.env` file with username, password, and graphQL API URL. *These variables are public, and therefore is not meant to be used in production. You should implement the actual login functionality and use tokens instead.*
@@ -22,6 +22,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to access 
 - The left sidebar contains icons of components. Drag and drop a component into the canvas to create a new component node. 
 - The topbar contains `Undo`, `Redo`, `Copy State`, `Load State` buttons. You can click `Copy State` which copies an encoded JSON string that represents the current page layout into your clipboard. You can then use `Load State` to paste this string load your layout.
 - The right sidebar contains the component hierarchy and component attribute editor. You can select a component which reveals a set of customizers depending on which component you select. 
+
+## Proof of Concept
 
 ### Proof 1 : Dynamically bind data changes on events
 
