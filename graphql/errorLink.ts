@@ -19,7 +19,7 @@ const addPendingRequest = (pendingRequest: Function) => {
 }
 
 const renewTokenApiClient = new ApolloClient({
-  link: createHttpLink({ uri: "http://localhost:7083/graphql" }),
+  link: createHttpLink({ uri: process.env.NEXT_PUBLIC_URL }),
   cache,
   credentials: 'include',
 })

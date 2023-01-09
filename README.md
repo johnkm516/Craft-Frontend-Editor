@@ -12,9 +12,7 @@ While the implementation is rough the framework is there, so you can use this pr
 ## Proof of Concept
 
 Clone the repository and download dependencies using `npm i` in the project directory. Use `npm run dev` to start the app. 
-This sample uses Apollo Client to implement a dynamic GraphQL query. My test backend has auth built-in, so I have a `.env` file with username and password. *These variables are public, and therefore is not meant to be used in production. You should implement the actual login functionality and use tokens instead.*
-
-You also need to modify the GraphQL endpoint in `\craftjs-website-generator\graphql\apollo-client.ts` and `\craftjs-website-generator\graphql\errorLink.ts`. *Yes this should be a env variable; like I said, very very rough implementation*.
+This sample uses Apollo Client to implement a dynamic GraphQL query. My test backend has auth built-in, so I have a `.env` file with username, password, and graphQL API URL. *These variables are public, and therefore is not meant to be used in production. You should implement the actual login functionality and use tokens instead.*
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to access the editor. 
